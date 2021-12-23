@@ -1,7 +1,11 @@
 #include <stdio.h>
+#include <stdlib.h>
 
 int getOption();
 int getNumber(int);
+void decToBin(int*, int);
+int binToDec(int);
+void printResult(int);
 
 int main()
 {
@@ -9,11 +13,14 @@ int main()
     int decimalNumber;
     int binaryNumber;
 
+    int *binary;
+
     option = getOption();
 
     switch (option)
     {
         case 1: decimalNumber = getNumber(option);
+                decToBin(binary, decimalNumber);
                 break;
         case 2: binaryNumber = getNumber(option);
                 break;
@@ -59,4 +66,38 @@ int getNumber(int option)
     }
 
     return (num);
+}
+
+void decToBin(int *binary, int num)
+{
+    int i;
+    int j;
+    int length;
+    int temp;
+
+    temp = num;
+
+    i = 0;
+    while (num > 0)
+    {
+        num /= 2;
+        i++;
+    }
+
+    binary = (int*) malloc(i * sizeof(int));
+
+    j = 0;
+    while (temp > 0)
+    {
+        *(binary + j) = temp % 2;
+        temp /= 2;
+        j++;
+    }
+
+    for (i = j - 1; i >= 0; i--)
+    {
+        printf("%d ", binary[i]);
+    }
+
+    printf("\n");
 }
