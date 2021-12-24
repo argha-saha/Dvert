@@ -4,8 +4,7 @@
 int getOption();
 int getNumber(int);
 void decToBin(int*, int);
-int binToDec(int);
-void printResult(int);
+void binToDec(int);
 
 int main()
 {
@@ -23,6 +22,7 @@ int main()
                 decToBin(binary, decimalNumber);
                 break;
         case 2: binaryNumber = getNumber(option);
+                binToDec(binaryNumber);
                 break;
     }
 
@@ -78,7 +78,7 @@ void decToBin(int *binary, int num)
     temp = num;
 
     i = 0;
-    while (num > 0)
+    while (num)
     {
         num /= 2;
         i++;
@@ -100,4 +100,25 @@ void decToBin(int *binary, int num)
     }
 
     printf("\n");
+}
+
+void binToDec(int num)
+{
+    int decimal;
+    int base;
+    int lastDigit;
+
+    decimal = 0;
+    base = 1;
+
+    while (num)
+    {
+        lastDigit = num % 10;
+        num /= 10;
+        decimal += base * lastDigit;
+
+        base *= 2;
+    }
+
+    printf("%d\n", decimal);
 }
